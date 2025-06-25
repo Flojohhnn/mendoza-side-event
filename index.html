@@ -6,14 +6,14 @@
     <title>Side Event Devconnect en Mendoza</title>
     <meta name="description" content="Una experiencia única y misteriosa en Mendoza, exclusiva para los asistentes de Devconnect Argentina 2025. Reserva tu lugar antes que nadie.">
     <style>
-        /* --- Reseteo Básico y Fuentes --- */
+        /* --- Nueva Paleta de Colores --- */
         :root {
-            --dark-bg: #0a0a0a;
+            --dark-bg: #0d1117; /* Azul noche profundo, inspirado en GitHub/Vercel */
             --main-text: #e0e0e0;
             --highlight-text: #ffffff;
-            --cta-red: #d9534f;
-            --cta-red-hover: #c9302c;
-            --urgent-yellow: #ffeb3b; /* Considerar un tono más vibrante: #fdd835 */
+            --primary-accent: #8a2be2; /* Violeta/Púrpura "Malbec" */
+            --primary-accent-hover: #7b25c9;
+            --secondary-accent: #00e5ff; /* Turquesa/Cian "Tech" */
         }
 
         body, html {
@@ -22,23 +22,34 @@
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             background-color: var(--dark-bg);
             color: var(--main-text);
-            scroll-behavior: smooth;
             line-height: 1.6;
         }
 
-        /* --- Banner de Urgencia --- */
+        /* --- Contenedor para el Fondo Animado --- */
+        #tsparticles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1; /* Lo ponemos detrás de todo el contenido */
+        }
+
+        /* --- Contenido Principal (Aseguramos que esté por encima de la animación) --- */
+        .content-wrapper {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* --- Banner de Urgencia (Sin cambios, ya encaja bien) --- */
         .urgency-banner {
-            background-color: rgba(0, 0, 0, 0.85);
-            color: var(--urgent-yellow);
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+            color: var(--highlight-text);
             text-align: center;
             padding: 0.5rem 1rem;
             font-size: 0.9rem;
             font-weight: 500;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-            box-sizing: border-box;
         }
 
         /* --- Hero Section --- */
@@ -48,29 +59,11 @@
             align-items: center;
             justify-content: center;
             text-align: center;
-            position: relative;
             padding: 0 20px;
             box-sizing: border-box;
-            background-image: url('https://images.unsplash.com/photo-1612852585793-244a79922a4a?q=80&w=2070&auto=format&fit=crop'); /* Imagen de viñedos y montañas - ¡Reemplazar! */
-            background-size: cover;
-            background-position: center;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: rgba(0, 0, 0, 0.65); /* Ligeramente más oscuro */
-            /* background-image: linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.5) 100%); /* Degradado sutil - Opcional */
-            z-index: 1;
         }
 
         .hero .content {
-            position: relative;
-            z-index: 2;
             max-width: 650px;
             animation: fadeIn 2s ease-in-out;
         }
@@ -98,24 +91,18 @@
             margin-right: auto;
         }
 
-        /* --- Formulario de Captura --- */
-        #email-form {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 10px;
-        }
-
+        /* --- Formulario de Captura (Estilo actualizado) --- */
         #email-input {
             width: 100%;
             max-width: 400px;
             padding: 0.85rem;
             font-size: 1rem;
             border-radius: 5px;
-            border: 1px solid #555;
-            background-color: rgba(255, 255, 255, 0.1);
+            border: 1px solid #333;
+            background-color: rgba(255, 255, 255, 0.05);
             color: var(--highlight-text);
             text-align: center;
+            backdrop-filter: blur(2px);
         }
         #email-input::placeholder { color: #aaa; }
 
@@ -127,32 +114,36 @@
             font-weight: bold;
             border: none;
             border-radius: 5px;
-            background-color: var(--cta-red);
+            background-color: var(--primary-accent); /* Color Malbec! */
             color: white;
             cursor: pointer;
             transition: background-color 0.3s ease;
         }
         #submit-button:hover {
-            background-color: var(--cta-red-hover);
+            background-color: var(--primary-accent-hover);
         }
 
-        /* --- Mensaje de Confirmación --- */
         #confirmation-message {
             display: none;
             color: var(--highlight-text);
             font-size: 1.2rem;
             padding: 2rem;
-            border: 1px solid var(--cta-red);
+            border: 1px solid var(--primary-accent);
             border-radius: 5px;
-            background-color: rgba(0,0,0,0.5);
+            background-color: rgba(138, 43, 226, 0.1);
+            backdrop-filter: blur(5px);
         }
 
-        /* --- Secciones Adicionales --- */
+        /* --- Secciones y Footer --- */
         .section {
             padding: 4rem 2rem;
             text-align: center;
             max-width: 800px;
             margin: 0 auto;
+            background-color: rgba(13, 17, 23, 0.7); /* Fondo semi-transparente para legibilidad */
+            backdrop-filter: blur(10px);
+            border-radius: 10px;
+            margin-bottom: 2rem;
         }
 
         .section h2 {
@@ -161,20 +152,11 @@
             margin-bottom: 1rem;
         }
 
-        /* --- Footer --- */
         .footer {
             text-align: center;
             padding: 2rem;
             font-size: 0.9rem;
             color: #888;
-            border-top: 1px solid #333;
-            background-color: var(--dark-bg); /* Fondo oscuro como el body */
-        }
-        .footer p {
-            margin: 0.5rem 0; /* Espacio entre las líneas del footer */
-        }
-        .footer p:last-child {
-            color: #aaa; /* Aclarar el texto adicional */
         }
 
         /* --- Animaciones y Media Queries --- */
@@ -192,65 +174,137 @@
     </style>
 </head>
 <body>
+    
+    <div id="tsparticles"></div>
 
-    <div class="urgency-banner">
-        Registro exclusivo para la comunidad Devconnect. ¡Cupos limitados!
-    </div>
+    <div class="content-wrapper">
 
-    <header class="hero">
-        <div class="content">
-            <h1>
-                El Mejor Side Event de Devconnect Está en Mendoza
-                <span>Reserva tu lugar antes que nadie</span>
-            </h1>
-            <p class="subtitle">
-                Próximamente: una experiencia secreta y exclusiva para asistentes de Devconnect ARG. ¿Te la vas a perder?
-            </p>
+        <div class="urgency-banner">
+            Registro exclusivo para la comunidad Devconnect. ¡Cupos limitados!
+        </div>
 
-            <div id="form-container">
-                <form id="email-form">
-                    <input type="email" id="email-input" placeholder="Tu correo para asegurar tu acceso" required>
-                    <button type="submit" id="submit-button">QUIERO MI LUGAR</button>
-                </form>
-                <div id="confirmation-message">
-                    <p><strong>¡Genial! Tu lugar está pre-reservado.</strong></p>
-                    <p>Recibirás novedades pronto. Serás el primero en saber cuándo abrimos las inscripciones oficiales. ¡Atento a tu correo!</p>
+        <header class="hero">
+            <div class="content">
+                <h1>
+                    El Mejor Side Event de Devconnect Está en Mendoza
+                    <span>Reserva tu lugar antes que nadie</span>
+                </h1>
+                <p class="subtitle">
+                    Próximamente: una experiencia secreta y exclusiva para asistentes de Devconnect ARG. ¿Te la vas a perder?
+                </p>
+                
+                <div id="form-container">
+                    <form id="email-form" onsubmit="handleFormSubmit(event)">
+                        <input type="email" id="email-input" placeholder="Tu correo para asegurar tu acceso" required>
+                        <button type="submit" id="submit-button">QUIERO MI LUGAR</button>
+                    </form>
+                    <div id="confirmation-message">
+                        <p><strong>¡Genial! Tu lugar está pre-reservado.</strong></p>
+                        <p>Recibirás novedades pronto. Serás el primero en saber cuándo abrimos las inscripciones oficiales. ¡Atento a tu correo!</p>
+                    </div>
                 </div>
             </div>
+        </header>
 
-        </div>
-    </header>
+        <section class="section">
+            <h2>¿Por Qué Mendoza?</h2>
+            <p>Porque después de la intensidad y el bullicio de Devconnect, necesitas el contrapunto perfecto. La energía de la Cordillera de los Andes y la inspiración de la tierra del sol y del buen vino te esperan para conectar a otro nivel.</p>
+        </section>
+        
+        <footer class="footer">
+            <p>&copy; 2025 | Mendoza Side Event</p>
+            <p>Un evento independiente creado por y para entusiastas de la comunidad Web3.</p>
+        </footer>
 
-    <section class="section">
-        <h2>¿Por Qué Mendoza?</h2>
-        <p>Porque después de la intensidad y el bullicio de Devconnect en Buenos Aires, necesitas el contrapunto perfecto. La energía de la Cordillera de los Andes y la inspiración de la tierra del sol y del buen vino te esperan para conectar a otro nivel.</p>
-    </section>
+    </div>
 
-    <footer class="footer">
-        <p>&copy; 2025 | Mendoza Side Event</p>
-        <p>Un evento independiente creado por y para entusiastas de la comunidad Web3.</p>
-    </footer>
-
+    <script src="https://cdn.jsdelivr.net/npm/tsparticles@3.4.0/tsparticles.bundle.min.js"></script>
+    
     <script>
-        const form = document.getElementById('email-form');
-        const formContainer = document.getElementById('form-container');
-        const confirmationMessage = document.getElementById('confirmation-message');
-
-        form.addEventListener('submit', function(event) {
+        // Función para manejar el envío del formulario
+        function handleFormSubmit(event) {
             event.preventDefault(); // Evita que la página se recargue
-
-            const emailInput = document.getElementById('email-input');
-            const userEmail = emailInput.value;
-
-            // Aquí es donde, en un futuro, podrías enviar el email a tu servicio (Mailchimp, etc.)
-            // Por ahora, solo simulamos el éxito.
-            console.log(`Email capturado: ${userEmail}`);
-
-            // Oculta el formulario y muestra el mensaje de confirmación
+            const form = document.getElementById('email-form');
+            const confirmationMessage = document.getElementById('confirmation-message');
+            const email = document.getElementById('email-input').value;
+            console.log(`Email capturado: ${email}`);
             form.style.display = 'none';
             confirmationMessage.style.display = 'block';
+        }
+
+        // Configuración de tsParticles
+        window.addEventListener('load', () => {
+            tsParticles.load({
+                id: "tsparticles",
+                options: {
+                    background: {
+                        color: {
+                            value: "#0d1117" // Mismo azul noche del body
+                        }
+                    },
+                    fpsLimit: 60,
+                    interactivity: {
+                        events: {
+                            onHover: {
+                                enable: true,
+                                mode: "grab"
+                            },
+                            onClick: {
+                                enable: true,
+                                mode: "push"
+                            }
+                        },
+                        modes: {
+                            grab: {
+                                distance: 140,
+                                links: {
+                                    opacity: 1
+                                }
+                            },
+                            push: {
+                                quantity: 4
+                            }
+                        }
+                    },
+                    particles: {
+                        color: {
+                            value: ["#8a2be2", "#00e5ff"] // ¡Nuestros colores! Malbec y Turquesa
+                        },
+                        links: {
+                            color: "#ffffff", // Conexiones en blanco sutil
+                            distance: 150,
+                            enable: true,
+                            opacity: 0.1,
+                            width: 1
+                        },
+                        move: {
+                            direction: "none",
+                            enable: true,
+                            outModes: "out",
+                            random: false,
+                            speed: 1,
+                            straight: false
+                        },
+                        number: {
+                            density: {
+                                enable: true,
+                            },
+                            value: 80 // Número de partículas
+                        },
+                        opacity: {
+                            value: 0.5
+                        },
+                        shape: {
+                            type: "circle"
+                        },
+                        size: {
+                            value: { min: 1, max: 3 }
+                        }
+                    },
+                    detectRetina: true
+                }
+            });
         });
     </script>
-
 </body>
 </html>
