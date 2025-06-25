@@ -13,7 +13,7 @@
             --highlight-text: #ffffff;
             --cta-red: #d9534f;
             --cta-red-hover: #c9302c;
-            --urgent-yellow: #ffeb3b;
+            --urgent-yellow: #ffeb3b; /* Considerar un tono más vibrante: #fdd835 */
         }
 
         body, html {
@@ -26,7 +26,7 @@
             line-height: 1.6;
         }
 
-        /* --- Banner de Urgencia (Opcional pero recomendado) --- */
+        /* --- Banner de Urgencia --- */
         .urgency-banner {
             background-color: rgba(0, 0, 0, 0.85);
             color: var(--urgent-yellow);
@@ -51,11 +51,11 @@
             position: relative;
             padding: 0 20px;
             box-sizing: border-box;
-            background-image: url('https://images.unsplash.com/photo-1599974636611-85f2691656b2?q=80&w=2070&auto=format&fit=crop'); /* Imagen genérica de montaña/viñedo - REEMPLAZAR */
+            background-image: url('https://images.unsplash.com/photo-1612852585793-244a79922a4a?q=80&w=2070&auto=format&fit=crop'); /* Imagen de viñedos y montañas - ¡Reemplazar! */
             background-size: cover;
             background-position: center;
         }
-        
+
         .hero::before {
             content: '';
             position: absolute;
@@ -63,7 +63,8 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background-color: rgba(0, 0, 0, 0.6);
+            background-color: rgba(0, 0, 0, 0.65); /* Ligeramente más oscuro */
+            /* background-image: linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.5) 100%); /* Degradado sutil - Opcional */
             z-index: 1;
         }
 
@@ -120,7 +121,7 @@
 
         #submit-button {
             width: 100%;
-            max-width: 418px; /* Ligeramente más grande para encajar bien */
+            max-width: 418px;
             padding: 0.85rem;
             font-size: 1.1rem;
             font-weight: bold;
@@ -137,7 +138,7 @@
 
         /* --- Mensaje de Confirmación --- */
         #confirmation-message {
-            display: none; /* Oculto por defecto */
+            display: none;
             color: var(--highlight-text);
             font-size: 1.2rem;
             padding: 2rem;
@@ -167,6 +168,13 @@
             font-size: 0.9rem;
             color: #888;
             border-top: 1px solid #333;
+            background-color: var(--dark-bg); /* Fondo oscuro como el body */
+        }
+        .footer p {
+            margin: 0.5rem 0; /* Espacio entre las líneas del footer */
+        }
+        .footer p:last-child {
+            color: #aaa; /* Aclarar el texto adicional */
         }
 
         /* --- Animaciones y Media Queries --- */
@@ -198,7 +206,7 @@
             <p class="subtitle">
                 Próximamente: una experiencia secreta y exclusiva para asistentes de Devconnect ARG. ¿Te la vas a perder?
             </p>
-            
+
             <div id="form-container">
                 <form id="email-form">
                     <input type="email" id="email-input" placeholder="Tu correo para asegurar tu acceso" required>
@@ -217,10 +225,10 @@
         <h2>¿Por Qué Mendoza?</h2>
         <p>Porque después de la intensidad y el bullicio de Devconnect en Buenos Aires, necesitas el contrapunto perfecto. La energía de la Cordillera de los Andes y la inspiración de la tierra del sol y del buen vino te esperan para conectar a otro nivel.</p>
     </section>
-    
+
     <footer class="footer">
         <p>&copy; 2025 | Mendoza Side Event</p>
-        <p>Un evento independiente creado por y para entusiastas de la comunidad.</p>
+        <p>Un evento independiente creado por y para entusiastas de la comunidad Web3.</p>
     </footer>
 
     <script>
